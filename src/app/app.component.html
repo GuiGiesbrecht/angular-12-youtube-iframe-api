@@ -1,0 +1,11 @@
+<p>Add Youtube Link</p>
+<input style="width: 80%" type="text" id="ytbInput" name="ytbInput" #ytbInput />
+<br />
+<br />
+<button (click)="checkYoutubeUrl(ytbInput.value)">Create Youtube Iframe</button>
+<button style="margin-left: 1em;" (click)="youtubeDestroy()">
+  Destroy Youtube Iframe
+</button>
+<br />
+<br />
+<div id="player"></div>
