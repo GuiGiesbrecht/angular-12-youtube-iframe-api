@@ -48,7 +48,8 @@ export class AppComponent {
     this.player = new window['YT'].Player('player', {
       videoId: this.video,
       playerVars: {
-        autoplay: 1,
+        height: '100%',
+        width: '100%',
         modestbranding: 1,
         controls: 1,
         disablekb: 1,
