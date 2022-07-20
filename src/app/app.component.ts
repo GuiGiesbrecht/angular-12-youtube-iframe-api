@@ -11,6 +11,13 @@ export class AppComponent {
   video: any;
   player: any;
 
+  // Verify if Youtube Video was watch
+  verifyYoutubeInterval;
+
+  ngOnDestroy(): void {
+    clearInterval(this.verifyYoutubeInterval);
+  }
+
   youtubeCreate() {
     if (this.player) {
       this.youtubeDestroy();
@@ -24,6 +31,7 @@ export class AppComponent {
     if (this.player) {
       this.player.destroy();
       this.player = null;
+      clearInterval(this.verifyYoutubeInterval);
     } else {
       alert('Player not found');
     }
@@ -69,6 +77,15 @@ export class AppComponent {
   /* 4. It will be called when the Video Player is ready (AutoPlay)*/
   onPlayerReady(event) {
     event.target.playVideo();
+    const that = this;
+    this.verifyYoutubeInterval = setInterval(function () {
+      if (event.target.getVideoLoadedFraction() > 0.9) {
+        alert('90% Watched');
+        clearInterval(that.verifyYoutubeInterval);
+      } else {
+        console.log('Less then 90% Watched');
+      }
+    }, 2000);
   }
 
   /* 5. API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
